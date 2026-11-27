@@ -249,18 +249,14 @@ function buildMobileSections() {
     const template = document.getElementById(sectionData.template);
     const section = document.createElement("section");
     const headingId = `mobile-title-${sectionKey}`;
-    const header = document.createElement("div");
-    const kickerElement = document.createElement("div");
     const heading = document.createElement("h2");
     const sectionContent = document.createElement("div");
 
     section.className = "mobile-section";
     section.id = `mobile-section-${sectionKey}`;
     section.setAttribute("aria-labelledby", headingId);
-    header.className = "mobile-section-heading";
-    kickerElement.className = "detail-kicker";
-    kickerElement.textContent = sectionData.kicker;
-    heading.className = "menu-option mobile-section-title";
+    heading.className = `menu-option mobile-section-title mobile-section-title--${sectionKey}`;
+    heading.dataset.optionIndex = String(options.indexOf(option) + 1);
     heading.id = headingId;
     heading.setAttribute("aria-label", option.getAttribute("aria-label"));
     heading.innerHTML = option.innerHTML;
@@ -268,8 +264,7 @@ function buildMobileSections() {
     sectionContent.append(template.content.cloneNode(true));
     const mobileMotionStatus = sectionContent.querySelector("#motionStatus");
     if (mobileMotionStatus) mobileMotionStatus.id = "mobileMotionStatus";
-    header.append(kickerElement, heading);
-    section.append(header, sectionContent);
+    section.append(heading, sectionContent);
     return section;
   });
 
