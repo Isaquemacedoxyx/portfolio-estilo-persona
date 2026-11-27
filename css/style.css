@@ -773,8 +773,8 @@ kbd {
   .interface-layer {
     position: relative;
     inset: auto;
-    min-height: 100vh;
-    min-height: 100svh;
+    min-height: 30vh;
+    min-height: 30svh;
   }
   .background { background-position: 35% center; }
   .scene-tint { background: linear-gradient(90deg, rgba(0, 13, 58, .08), rgba(0, 35, 145, .40)); }
@@ -783,28 +783,12 @@ kbd {
   .audio-volume { width: clamp(50px, 14vw, 72px); }
   .profile-mark { top: 11%; left: 5%; font-size: 8px; }
   .profile-mark strong { font-size: 12px; }
-  .menu-area { top: 24%; right: auto; left: 50%; width: max-content; max-width: 88vw; transform: translateX(-50%) rotate(-6deg); }
-  .menu-option { height: clamp(22px, 5vw, 38px); padding-left: 9px; font-size: clamp(22px, 5vw, 38px); }
-  .menu-list { gap: 3px; }
-  .menu-option { min-height: 44px; touch-action: manipulation; }
-  .menu-option .selection-white { display: block; }
-  .menu-option .selection-text-red { display: inline-flex; }
-  .menu-option:nth-child(1) { left: -6px; }
-  .menu-option:nth-child(2) { left: 4px; }
-  .menu-option:nth-child(3) { left: -2px; }
-  .menu-option:nth-child(4) { left: 6px; }
-  .menu-option:nth-child(5) { left: -7px; }
-  .menu-option:nth-child(6) { left: 3px; }
-  .level-marker { top: 27%; right: 4%; font-size: 7px; }
-  .level-marker i { height: 70px; }
-  .bottom-help { bottom: 3%; align-items: flex-end; }
-  .scroll-hint { gap: 8px; font-size: 7px; }
-  .scroll-hint b { font-size: 20px; }
-  .game-prompt strong { font-size: 16px; }
-  .game-prompt span { max-width: 55vw; font-size: 9px; line-height: 1.7; }
+  .menu-area,
+  .bottom-help,
+  .level-marker { display: none; }
   .mobile-sections {
     display: grid;
-    gap: 18px;
+    gap: 24px;
     width: min(100%, 760px);
     margin: 0 auto;
     padding: 20px clamp(16px, 5vw, 32px) 72px;
@@ -819,26 +803,45 @@ kbd {
     transform: skewY(-.5deg);
   }
   .mobile-section-heading,
-  .mobile-section .detail-content,
-  .mobile-back-to-menu { transform: skewY(.5deg); }
-  .mobile-section .detail-title {
-    margin: 10px 0 18px;
-    font-family: var(--font-display);
-    font-size: clamp(30px, 7vw, 48px);
-    font-style: italic;
-    line-height: .95;
+  .mobile-section .detail-content { transform: skewY(.5deg); }
+  .mobile-section-heading .detail-kicker { margin-bottom: 12px; }
+  .mobile-section-title {
+    width: max-content;
+    max-width: 100%;
+    min-height: 0;
+    height: auto;
+    margin: 0 0 18px;
+    padding: 2px 12px 5px 8px;
+    cursor: default;
+    pointer-events: none;
+    white-space: nowrap;
   }
+  .mobile-section-title::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: -.76em;
+    right: -.02em;
+    bottom: -.2em;
+    left: -.14em;
+    background: #ff96fe;
+    opacity: .82;
+    clip-path: polygon(0 100%, 100% 0, 90% 100%);
+    mix-blend-mode: screen;
+    transform: translateY(-.20em) rotate(2deg) skewX(-5deg) scaleX(1.14) scaleY(1.17);
+    pointer-events: none;
+  }
+  .mobile-section-title .selection-white { display: block; }
+  .mobile-section-title .selection-text-red { display: inline-flex; }
+  .mobile-section-title .selection-white { z-index: 2; }
+  .mobile-section-title .option-text { z-index: 3; color: #000; }
+  .mobile-section-title .option-text b { color: #000; }
+  .mobile-section-title .selection-text-red { z-index: 4; }
+  .mobile-section-title .word + .word,
+  .mobile-section-title .selection-text-red .word + .word { margin-left: .22em; }
+  .mobile-section-title { background: transparent; border: 0; transform: none; }
   .mobile-section .detail-content { font-size: 15px; line-height: 1.65; overflow-wrap: anywhere; }
   .mobile-section .detail-content p { margin: 0 0 14px; }
-  .mobile-section .mobile-back-to-menu {
-    display: inline-block;
-    margin-top: 18px;
-    color: var(--cyan);
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: .12em;
-    text-decoration: none;
-  }
 }
 
 @media (max-width: 480px) {

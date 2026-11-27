@@ -2,7 +2,6 @@ const portfolio = document.getElementById("portfolio");
 const menuView = document.getElementById("menuView");
 const options = [...document.querySelectorAll(".menu-option")];
 const mobileSections = document.getElementById("mobileSections");
-const mobileViewport = window.matchMedia("(max-width: 760px)");
 const panel = document.getElementById("detailPanel");
 const title = document.getElementById("detailTitle");
 const kicker = document.getElementById("detailKicker");
@@ -254,7 +253,6 @@ function buildMobileSections() {
     const kickerElement = document.createElement("div");
     const heading = document.createElement("h2");
     const sectionContent = document.createElement("div");
-    const backToMenu = document.createElement("a");
 
     section.className = "mobile-section";
     section.id = `mobile-section-${sectionKey}`;
@@ -262,19 +260,16 @@ function buildMobileSections() {
     header.className = "mobile-section-heading";
     kickerElement.className = "detail-kicker";
     kickerElement.textContent = sectionData.kicker;
-    heading.className = "detail-title";
+    heading.className = "menu-option mobile-section-title";
     heading.id = headingId;
-    heading.textContent = sectionData.title;
+    heading.setAttribute("aria-label", option.getAttribute("aria-label"));
+    heading.innerHTML = option.innerHTML;
     sectionContent.className = "detail-content";
     sectionContent.append(template.content.cloneNode(true));
     const mobileMotionStatus = sectionContent.querySelector("#motionStatus");
     if (mobileMotionStatus) mobileMotionStatus.id = "mobileMotionStatus";
-    backToMenu.className = "mobile-back-to-menu";
-    backToMenu.href = "#menuView";
-    backToMenu.textContent = "↑ MENU";
-
     header.append(kickerElement, heading);
-    section.append(header, sectionContent, backToMenu);
+    section.append(header, sectionContent);
     return section;
   });
 
@@ -324,12 +319,6 @@ options.forEach((button, index) => {
     const selectionChanged = index !== activeIndex;
     setActive(index);
     if (!selectionChanged) pulseSelection(button);
-
-    if (mobileViewport.matches) {
-      document.getElementById(`mobile-section-${button.dataset.section}`)
-        .scrollIntoView({ behavior: portfolio.dataset.motion === "reduced" ? "auto" : "smooth", block: "start" });
-      return;
-    }
 
     openSection(button.dataset.section);
   });
