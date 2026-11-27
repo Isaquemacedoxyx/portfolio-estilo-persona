@@ -6,7 +6,14 @@ const title = document.getElementById("detailTitle");
 const kicker = document.getElementById("detailKicker");
 const content = document.getElementById("detailContent");
 const closeButton = document.getElementById("detailClose");
+const backgroundIntro = document.getElementById("backgroundIntro");
 const backgroundVideo = document.getElementById("backgroundVideo");
+const backgroundAudio = document.getElementById("backgroundAudio");
+const audioToggle = document.getElementById("audioToggle");
+const audioVolume = document.getElementById("audioVolume");
+const audioState = document.getElementById("audioState");
+const audioValue = document.getElementById("audioValue");
+const audioStatus = document.getElementById("audioStatus");
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const sections = {
@@ -20,15 +27,155 @@ const sections = {
 
 let activeIndex = 0;
 let chosenMotion = null;
+let manuallyMuted = false;
+let audioPlaybackActive = false;
+
+function updateAudioControls() {
+  const soundOn = audioPlaybackActive
+    && !backgroundAudio.paused
+    && !backgroundAudio.muted
+    && backgroundAudio.volume > 0;
+
+  audioToggle.setAttribute("aria-label", soundOn ? "Silenciar música" : "Ativar som");
+  audioToggle.setAttribute("aria-pressed", String(soundOn));
+  audioState.textContent = soundOn ? "ON" : "OFF";
+  const volumePercent = Math.round(backgroundAudio.volume * 100);
+  audioVolume.value = String(volumePercent);
+  audioVolume.setAttribute("aria-valuetext", `${volumePercent}%`);
+  audioVolume.style.setProperty("--volume-fill", `${backgroundAudio.volume * 100}%`);
+  audioValue.textContent = `${volumePercent}%`;
+}
+
+function showAudioStatus(message) {
+  audioStatus.textContent = message;
+  audioStatus.hidden = !message;
+}
+
+function playBackgroundAudio() {
+  backgroundAudio.play().then(() => {
+    audioPlaybackActive = true;
+    showAudioStatus("");
+    updateAudioControls();
+  }).catch((error) => {
+    updateAudioControls();
+    if (error.name === "NotAllowedError") {
+      showAudioStatus("AUTOPLAY BLOQUEADO · CLIQUE");
+      return;
+    }
+
+    if (error.name === "AbortError" && backgroundAudio.paused) return;
+
+    if (backgroundAudio.error || error.name === "NotSupportedError") {
+      showAudioStatus("NÃO FOI POSSÍVEL CARREGAR: assets/audio/Color Your Night.mp3");
+      if (!backgroundAudio.error) {
+        console.error("O arquivo assets/audio/Color Your Night.mp3 não pôde ser carregado.", error);
+      }
+      return;
+    }
+
+    showAudioStatus("NÃO FOI POSSÍVEL REPRODUZIR A TRILHA");
+    console.error("A trilha sonora não pôde ser reproduzida.", error);
+  });
+}
+
+function setAudioVolume(value) {
+  const volume = Math.max(0, Math.min(1, value));
+  audioVolume.value = String(Math.round(volume * 100));
+  backgroundAudio.volume = volume;
+  backgroundAudio.muted = manuallyMuted || volume === 0;
+  updateAudioControls();
+}
+
+audioToggle.addEventListener("click", () => {
+  if (backgroundAudio.paused) {
+    manuallyMuted = false;
+    if (backgroundAudio.volume === 0) setAudioVolume(0.25);
+    backgroundAudio.muted = false;
+    playBackgroundAudio();
+    return;
+  }
+
+  manuallyMuted = !manuallyMuted;
+  backgroundAudio.muted = manuallyMuted || backgroundAudio.volume === 0;
+  updateAudioControls();
+});
+
+audioVolume.addEventListener("input", () => {
+  setAudioVolume(Number(audioVolume.value) / 100);
+});
+
+backgroundAudio.addEventListener("play", updateAudioControls);
+backgroundAudio.addEventListener("playing", () => {
+  audioPlaybackActive = true;
+  updateAudioControls();
+});
+["pause", "waiting", "stalled", "ended", "emptied"].forEach((eventName) => {
+  backgroundAudio.addEventListener(eventName, () => {
+    audioPlaybackActive = false;
+    updateAudioControls();
+  });
+});
+backgroundAudio.addEventListener("volumechange", updateAudioControls);
+backgroundAudio.addEventListener("error", () => {
+  audioPlaybackActive = false;
+  showAudioStatus("NÃO FOI POSSÍVEL CARREGAR: assets/audio/Color Your Night.mp3");
+  updateAudioControls();
+  console.error("O arquivo assets/audio/Color Your Night.mp3 não pôde ser carregado.", backgroundAudio.error);
+});
 
 function playBackgroundVideo() {
-  portfolio.dataset.videoState = "loading";
+  if (!backgroundVideo.paused) return;
+
+  portfolio.dataset.videoState = backgroundIntro.ended ? "transition" : "loading";
   backgroundVideo.play().catch((error) => {
     if (error.name === "AbortError" && backgroundVideo.paused) return;
     portfolio.dataset.videoState = "fallback";
     console.error("O vídeo de fundo não pôde ser reproduzido.", error);
   });
 }
+
+function playBackgroundIntro() {
+  if (!backgroundIntro.paused) {
+    portfolio.dataset.videoState = "intro";
+    return;
+  }
+
+  portfolio.dataset.videoState = "loading";
+  backgroundIntro.play().catch((error) => {
+    if (error.name === "AbortError" && backgroundIntro.paused) return;
+    console.error("O vídeo inicial de fundo não pôde ser reproduzido.", error);
+    playBackgroundVideo();
+  });
+}
+
+backgroundIntro.addEventListener("playing", () => {
+  if (portfolio.dataset.motion === "reduced") {
+    backgroundIntro.pause();
+    portfolio.dataset.videoState = "reduced";
+    return;
+  }
+
+  portfolio.dataset.videoState = "intro";
+});
+
+backgroundIntro.addEventListener("ended", () => {
+  if (portfolio.dataset.motion === "reduced") {
+    portfolio.dataset.videoState = "reduced";
+    return;
+  }
+
+  playBackgroundVideo();
+});
+
+backgroundIntro.addEventListener("error", () => {
+  if (portfolio.dataset.motion === "reduced") {
+    portfolio.dataset.videoState = "reduced";
+    return;
+  }
+
+  console.error("O vídeo inicial de fundo não pôde ser carregado.", backgroundIntro.error);
+  playBackgroundVideo();
+});
 
 backgroundVideo.addEventListener("playing", () => {
   if (portfolio.dataset.motion === "reduced") {
@@ -69,10 +216,13 @@ function applyMotion(choice) {
   }
 
   if (choice === "reduced") {
+    backgroundIntro.pause();
     backgroundVideo.pause();
     portfolio.dataset.videoState = "reduced";
-  } else {
+  } else if (backgroundIntro.ended) {
     playBackgroundVideo();
+  } else {
+    playBackgroundIntro();
   }
 }
 
@@ -168,3 +318,6 @@ motionPreference.addEventListener("change", (event) => {
 
 setActive(0);
 applyMotion(motionPreference.matches ? "reduced" : "normal");
+backgroundAudio.volume = Number(audioVolume.value) / 100;
+updateAudioControls();
+playBackgroundAudio();

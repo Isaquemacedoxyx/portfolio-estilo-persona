@@ -12,7 +12,10 @@
 <body>
   <main class="game-ui" id="portfolio" aria-label="Portfólio">
     <div class="background" aria-hidden="true">
-      <video class="background-video" id="backgroundVideo" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true">
+      <video class="background-video background-video--intro" id="backgroundIntro" muted playsinline preload="auto" tabindex="-1" aria-hidden="true">
+        <source src="assets/images/background1.mp4" type="video/mp4">
+      </video>
+      <video class="background-video background-video--loop" id="backgroundVideo" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true">
         <source src="assets/images/background2.mp4" type="video/mp4">
       </video>
     </div>
@@ -22,6 +25,30 @@
       <span class="status-dot" aria-hidden="true"></span>
       <span>ESTUDANTE DE CIÊNCIA DA COMPUTAÇÃO</span>
     </header>
+
+    <section class="audio-control" aria-label="Controles da trilha sonora">
+      <button class="audio-toggle" id="audioToggle" type="button" aria-label="Ativar som" aria-pressed="false">
+        <span class="audio-icon" aria-hidden="true">
+          <svg class="audio-speaker" viewBox="0 0 64 48" focusable="false">
+            <path class="audio-wave audio-wave--left audio-wave--outer" d="M10 8Q0 24 10 40"></path>
+            <path class="audio-wave audio-wave--left audio-wave--inner" d="M18 15Q10 24 18 33"></path>
+            <path class="audio-wave audio-wave--right audio-wave--inner" d="M46 15Q54 24 46 33"></path>
+            <path class="audio-wave audio-wave--right audio-wave--outer" d="M54 8Q64 24 54 40"></path>
+            <g class="audio-subwoofer">
+              <circle class="audio-speaker__rim" cx="32" cy="24" r="17"></circle>
+              <circle class="audio-speaker__ring" cx="32" cy="24" r="12.5"></circle>
+              <circle class="audio-speaker__core" cx="32" cy="24" r="6"></circle>
+              <circle class="audio-speaker__glint" cx="30" cy="22" r="1.5"></circle>
+            </g>
+          </svg>
+        </span>
+      </button>
+      <span class="audio-state" id="audioState" aria-hidden="true">OFF</span>
+      <input class="audio-volume" id="audioVolume" type="range" min="0" max="100" step="1" value="25" aria-label="Volume da música">
+      <span class="audio-value" id="audioValue" aria-hidden="true">25%</span>
+      <span class="audio-status" id="audioStatus" role="status" aria-live="polite" hidden></span>
+    </section>
+    <audio id="backgroundAudio" src="assets/audio/Color%20Your%20Night.mp3" loop preload="none"></audio>
 
     <aside class="profile-mark" aria-label="Perfil acadêmico">
       <span class="profile-mark__label">STATUS</span>
