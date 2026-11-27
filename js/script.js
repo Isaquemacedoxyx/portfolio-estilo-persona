@@ -1,6 +1,8 @@
 const portfolio = document.getElementById("portfolio");
 const menuView = document.getElementById("menuView");
 const options = [...document.querySelectorAll(".menu-option")];
+const mobileSections = document.getElementById("mobileSections");
+const mobileViewport = window.matchMedia("(max-width: 760px)");
 const panel = document.getElementById("detailPanel");
 const title = document.getElementById("detailTitle");
 const kicker = document.getElementById("detailKicker");
@@ -216,12 +218,14 @@ function applyMotion(choice) {
     button.setAttribute("aria-pressed", String(button.dataset.motionChoice === choice));
   });
 
-  const status = document.getElementById("motionStatus");
-  if (status) {
-    status.textContent = choice === "reduced"
-      ? "Animação de fundo reduzida."
-      : "Animações normais ativadas.";
-  }
+  ["motionStatus", "mobileMotionStatus"].forEach((statusId) => {
+    const status = document.getElementById(statusId);
+    if (status) {
+      status.textContent = choice === "reduced"
+        ? "Animação de fundo reduzida."
+        : "Animações normais ativadas.";
+    }
+  });
 
   if (choice === "reduced") {
     backgroundIntro.pause();
@@ -238,6 +242,51 @@ function setMotion(choice) {
   chosenMotion = choice;
   applyMotion(choice);
 }
+
+function buildMobileSections() {
+  const sectionsMarkup = options.map((option) => {
+    const sectionKey = option.dataset.section;
+    const sectionData = sections[sectionKey];
+    const template = document.getElementById(sectionData.template);
+    const section = document.createElement("section");
+    const headingId = `mobile-title-${sectionKey}`;
+    const header = document.createElement("div");
+    const kickerElement = document.createElement("div");
+    const heading = document.createElement("h2");
+    const sectionContent = document.createElement("div");
+    const backToMenu = document.createElement("a");
+
+    section.className = "mobile-section";
+    section.id = `mobile-section-${sectionKey}`;
+    section.setAttribute("aria-labelledby", headingId);
+    header.className = "mobile-section-heading";
+    kickerElement.className = "detail-kicker";
+    kickerElement.textContent = sectionData.kicker;
+    heading.className = "detail-title";
+    heading.id = headingId;
+    heading.textContent = sectionData.title;
+    sectionContent.className = "detail-content";
+    sectionContent.append(template.content.cloneNode(true));
+    const mobileMotionStatus = sectionContent.querySelector("#motionStatus");
+    if (mobileMotionStatus) mobileMotionStatus.id = "mobileMotionStatus";
+    backToMenu.className = "mobile-back-to-menu";
+    backToMenu.href = "#menuView";
+    backToMenu.textContent = "↑ MENU";
+
+    header.append(kickerElement, heading);
+    section.append(header, sectionContent, backToMenu);
+    return section;
+  });
+
+  mobileSections.replaceChildren(...sectionsMarkup);
+}
+
+buildMobileSections();
+
+mobileSections.addEventListener("click", (event) => {
+  const motionButton = event.target.closest("[data-motion-choice]");
+  if (motionButton) setMotion(motionButton.dataset.motionChoice);
+});
 
 function openSection(sectionKey) {
   const section = sections[sectionKey];
@@ -275,6 +324,13 @@ options.forEach((button, index) => {
     const selectionChanged = index !== activeIndex;
     setActive(index);
     if (!selectionChanged) pulseSelection(button);
+
+    if (mobileViewport.matches) {
+      document.getElementById(`mobile-section-${button.dataset.section}`)
+        .scrollIntoView({ behavior: portfolio.dataset.motion === "reduced" ? "auto" : "smooth", block: "start" });
+      return;
+    }
+
     openSection(button.dataset.section);
   });
 });
