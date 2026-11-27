@@ -18,17 +18,18 @@ Abra `index.html` diretamente em um navegador ou use a extensão Live Server no 
 - `index.html`: estrutura semântica, conteúdo e modelos das telas.
 - `css/style.css`: identidade visual, fundo, estados de interação e adaptação para telas menores.
 - `js/script.js`: navegação, abertura e fechamento de telas, foco de teclado e preferência de animação.
-- `assets/images/background2.mp4`: vídeo de fundo publicado com autorização de redistribuição.
-- `assets/images/background.gif` e `assets/images/persona-reference.jpg`: arquivos locais excluídos do repositório público por não haver licença de redistribuição.
+- `assets/images/background2.mp4`: vídeo de fundo em loop (1920 × 1080), reproduzido sem áudio.
+- `assets/images/background.gif`: fallback para o navegador quando o vídeo não puder ser reproduzido (400 × 225).
+- `assets/images/persona-reference.jpg`: imagem de referência em 1920 × 1080; contém elementos do menu original e não é usada como fundo da interface.
 - O título e as opções usam Arial Black em negrito e itálico, aproximando a tipografia da referência visual.
 - `assets/fonts/RobotoCondensed-BlackItalic.ttf` e `assets/fonts/OFL.txt`: fonte e licença SIL Open Font License 1.1.
-- `assets/fonts/FOT-NewRodin Pro EB.otf`: fonte local excluída do repositório público por não haver licença de redistribuição.
+- `assets/fonts/FOT-NewRodin Pro EB.otf`: fonte mantida no projeto, mas não usada no menu atual.
 
-O vídeo de fundo acompanha a publicação. O GIF de fallback e a imagem de referência permanecem apenas locais; se o navegador não reproduzir o vídeo, a interface usa o fundo azul de base.
+Os recursos de terceiros incluídos foram publicados com base na autorização declarada pelo autor do projeto.
 
 ## Personalização
 
-- Para trocar o vídeo de fundo, substitua `assets/images/background2.mp4` por mídia própria ou licenciada. O GIF local continua como fallback no ambiente de desenvolvimento.
+- Para trocar o vídeo de fundo, substitua `assets/images/background2.mp4` e, se necessário, atualize também o GIF de fallback em `css/style.css`.
 - Edite os textos e os modelos `<template>` em `index.html` para atualizar as informações das telas.
 - Para adicionar outra opção, inclua seu botão no menu, um modelo de conteúdo e os metadados correspondentes em `sections` no `js/script.js`.
 - Ajuste cores, tipografia e posicionamento em `css/style.css`. Evite remover os IDs e atributos `data-section` usados pelo JavaScript.
