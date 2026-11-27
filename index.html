@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#082b9b">
+  <meta name="description" content="Portfólio acadêmico de um estudante de Ciência da Computação.">
+  <title>Portfólio — Isaque</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="game-ui" id="portfolio" aria-label="Portfólio">
+    <div class="background" aria-hidden="true">
+      <video class="background-video" id="backgroundVideo" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true">
+        <source src="assets/images/background2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="scene-tint" aria-hidden="true"></div>
+
+    <header class="top-label">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>ESTUDANTE DE CIÊNCIA DA COMPUTAÇÃO</span>
+    </header>
+
+    <aside class="profile-mark" aria-label="Perfil acadêmico">
+      <span class="profile-mark__label">STATUS</span>
+      <strong>2º SEMESTRE</strong>
+      <span>APRENDENDO / CRIANDO</span>
+    </aside>
+
+    <section class="menu-area" id="menuView" aria-label="Menu principal">
+      <nav class="menu-list" aria-label="Seções do portfólio">
+        <button class="menu-option is-active" type="button" data-section="about" aria-label="Sobre mim" aria-pressed="true">
+          <span class="selection-white" aria-hidden="true"></span>
+          <span class="option-text" aria-hidden="true">
+            <span class="word"><b>S</b><b>O</b><b>B</b><b>R</b><b>E</b></span>
+            <span class="word"><b>M</b><b>I</b><b>M</b></span>
+          </span>
+          <span class="selection-text-red" aria-hidden="true">
+            <span class="word"><b>S</b><b>O</b><b>B</b><b>R</b><b>E</b></span>
+            <span class="word"><b>M</b><b>I</b><b>M</b></span>
+          </span>
+        </button>
+        <button class="menu-option" type="button" data-section="skills" aria-label="Habilidades" aria-pressed="false">
+          <span class="selection-white" aria-hidden="true"></span>
+          <span class="option-text" aria-hidden="true">
+            <span class="word"><b>H</b><b>A</b><b>B</b><b>I</b><b>L</b><b>I</b><b>D</b><b>A</b><b>D</b><b>E</b><b>S</b></span>
+          </span>
+          <span class="selection-text-red" aria-hidden="true">
+            <span class="word"><b>H</b><b>A</b><b>B</b><b>I</b><b>L</b><b>I</b><b>D</b><b>A</b><b>D</b><b>E</b><b>S</b></span>
+          </span>
+        </button>
+        <button class="menu-option" type="button" data-section="projects" aria-label="Projetos" aria-pressed="false">
+          <span class="selection-white" aria-hidden="true"></span>
+          <span class="option-text" aria-hidden="true">
+            <span class="word"><b>P</b><b>R</b><b>O</b><b>J</b><b>E</b><b>T</b><b>O</b><b>S</b></span>
+          </span>
+          <span class="selection-text-red" aria-hidden="true">
+            <span class="word"><b>P</b><b>R</b><b>O</b><b>J</b><b>E</b><b>T</b><b>O</b><b>S</b></span>
+          </span>
+        </button>
+        <button class="menu-option" type="button" data-section="studies" aria-label="Estudos" aria-pressed="false">
+          <span class="selection-white" aria-hidden="true"></span>
+          <span class="option-text" aria-hidden="true">
+            <span class="word"><b>E</b><b>S</b><b>T</b><b>U</b><b>D</b><b>O</b><b>S</b></span>
+          </span>
+          <span class="selection-text-red" aria-hidden="true">
+            <span class="word"><b>E</b><b>S</b><b>T</b><b>U</b><b>D</b><b>O</b><b>S</b></span>
+          </span>
+        </button>
+        <button class="menu-option" type="button" data-section="links" aria-label="Vínculos" aria-pressed="false">
+          <span class="selection-white" aria-hidden="true"></span>
+          <span class="option-text" aria-hidden="true">
+            <span class="word"><b>V</b><b>Í</b><b>N</b><b>C</b><b>U</b><b>L</b><b>O</b><b>S</b></span>
+          </span>
+          <span class="selection-text-red" aria-hidden="true">
+            <span class="word"><b>V</b><b>Í</b><b>N</b><b>C</b><b>U</b><b>L</b><b>O</b><b>S</b></span>
+          </span>
+        </button>
+        <button class="menu-option" type="button" data-section="system" aria-label="Sistema" aria-pressed="false">
+          <span class="selection-white" aria-hidden="true"></span>
+          <span class="option-text" aria-hidden="true">
+            <span class="word"><b>S</b><b>I</b><b>S</b><b>T</b><b>E</b><b>M</b><b>A</b></span>
+          </span>
+          <span class="selection-text-red" aria-hidden="true">
+            <span class="word"><b>S</b><b>I</b><b>S</b><b>T</b><b>E</b><b>M</b><b>A</b></span>
+          </span>
+        </button>
+      </nav>
+    </section>
+
+    <aside class="level-marker" aria-hidden="true">
+      <span>LEVEL 02</span><i></i><span>LEARNING / BUILDING</span>
+    </aside>
+
+    <footer class="bottom-help">
+      <p class="scroll-hint"><span>ESCOLHA UM CAMINHO</span><b aria-hidden="true">↗</b></p>
+      <div class="game-prompt">
+        <strong>Explore meu portfólio</strong>
+        <small>COMANDOS</small>
+        <span><kbd>↑</kbd><kbd>↓</kbd> Selecionar&nbsp;&nbsp; <kbd>Enter</kbd> Abrir&nbsp;&nbsp; <kbd>Esc</kbd> Voltar</span>
+      </div>
+    </footer>
+
+    <section class="detail-panel" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden>
+      <div class="detail-kicker" id="detailKicker"></div>
+      <h1 id="detailTitle"></h1>
+      <div class="detail-content" id="detailContent"></div>
+      <button class="detail-close" id="detailClose" type="button"><kbd>Esc</kbd> VOLTAR AO MENU</button>
+    </section>
+
+    <template id="aboutContent">
+      <p>Sou estudante de Ciência da Computação, atualmente no segundo semestre. Tenho interesse em tecnologia, desenvolvimento de software e inteligência artificial.</p>
+      <p>Gosto de entender como as coisas funcionam, explorar novas tecnologias e transformar ideias em projetos.</p>
+    </template>
+
+    <template id="skillsContent">
+      <p>Estou construindo minha base e aprendendo na prática. Estas são tecnologias que estudo — não uma lista de especialidades profissionais.</p>
+      <ul class="skill-list">
+        <li><span>C</span><span>Fundamentos de programação</span></li>
+        <li><span>Python</span><span>Lógica e pequenos programas</span></li>
+        <li><span>HTML</span><span>Estrutura de páginas</span></li>
+        <li><span>CSS</span><span>Estilo e responsividade</span></li>
+        <li><span>JavaScript</span><span>Interatividade para a web</span></li>
+      </ul>
+    </template>
+
+    <template id="projectsContent">
+      <div class="project-list">
+        <article class="project-entry">
+          <h2>desafiocolaborativo-git</h2>
+          <p>Projeto acadêmico colaborativo desenvolvido durante o semestre, com foco na prática de trabalho em equipe e Git.</p>
+          <a href="https://github.com/Isaquemacedoxyx" target="_blank" rel="noopener noreferrer">Visitar meu GitHub <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="project-entry">
+          <h2>avalia404</h2>
+          <p>Projeto em Python voltado à validação de notas e faltas e ao cálculo de média.</p>
+        </article>
+        <article class="project-entry">
+          <h2>GRUPOECHO</h2>
+          <p>Trabalho acadêmico de levantamento e documentação de requisitos, regras de negócio e prototipagem. Não é uma implementação funcional completa.</p>
+        </article>
+      </div>
+    </template>
+
+    <template id="studiesContent">
+      <p>Estou cursando Ciência da Computação e sigo desenvolvendo minha base acadêmica, um conceito e um projeto de cada vez.</p>
+      <ul class="study-list">
+        <li>Fundamentos de programação</li>
+        <li>Linguagem C</li>
+        <li>Python</li>
+        <li>Desenvolvimento web</li>
+        <li>Banco de dados</li>
+      </ul>
+    </template>
+
+    <template id="linksContent">
+      <p>Meus espaços para compartilhar projetos e acompanhar minha trajetória.</p>
+      <ul class="link-list">
+        <li><a href="https://github.com/Isaquemacedoxyx" target="_blank" rel="noopener noreferrer">GitHub <span>github.com/Isaquemacedoxyx</span><span aria-hidden="true">↗</span></a></li>
+        <li><span class="link-placeholder">LinkedIn <span>Endereço será adicionado em breve</span></span></li>
+      </ul>
+    </template>
+
+    <template id="systemContent">
+      <p>Escolha como prefere visualizar os movimentos da interface. A preferência do seu dispositivo é respeitada inicialmente.</p>
+      <div class="motion-controls" role="group" aria-label="Preferência de animações">
+        <button type="button" class="motion-option" data-motion-choice="normal" aria-pressed="false">ANIMAÇÕES NORMAIS</button>
+        <button type="button" class="motion-option" data-motion-choice="reduced" aria-pressed="false">ANIMAÇÕES REDUZIDAS</button>
+      </div>
+      <p class="motion-status" id="motionStatus" aria-live="polite"></p>
+    </template>
+  </main>
+</body>
+</html>
