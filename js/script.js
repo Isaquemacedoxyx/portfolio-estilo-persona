@@ -15,12 +15,11 @@ const audioState = document.getElementById("audioState");
 const audioValue = document.getElementById("audioValue");
 const audioStatus = document.getElementById("audioStatus");
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-
 const sections = {
   about: { kicker: "PROFILE", title: "SOBRE MIM", template: "aboutContent" },
   skills: { kicker: "SKILL SET", title: "HABILIDADES", template: "skillsContent" },
   projects: { kicker: "MISSION LOG", title: "PROJETOS", template: "projectsContent" },
-  studies: { kicker: "LEARNING PATH", title: "ESTUDOS", template: "studiesContent" },
+  studies: { kicker: "ESTUDANDO AGORA", title: "ESTUDANDO AGORA", template: "studiesContent" },
   links: { kicker: "SOCIAL LINK", title: "VÍNCULOS", template: "linksContent" },
   system: { kicker: "SYSTEM", title: "SISTEMA", template: "systemContent" }
 };
@@ -193,12 +192,21 @@ backgroundVideo.addEventListener("error", () => {
 });
 
 function setActive(index) {
-  activeIndex = (index + options.length) % options.length;
+  const nextIndex = (index + options.length) % options.length;
+  const selectionChanged = nextIndex !== activeIndex;
+  activeIndex = nextIndex;
   options.forEach((button, buttonIndex) => {
     const active = buttonIndex === activeIndex;
     button.classList.toggle("is-active", active);
     button.setAttribute("aria-pressed", String(active));
+    if (active && selectionChanged) pulseSelection(button);
   });
+}
+
+function pulseSelection(button) {
+  button.classList.remove("is-pulsing");
+  void button.offsetWidth;
+  button.classList.add("is-pulsing");
 }
 
 function applyMotion(choice) {
@@ -264,7 +272,9 @@ options.forEach((button, index) => {
   button.addEventListener("mouseenter", () => setActive(index));
   button.addEventListener("focus", () => setActive(index));
   button.addEventListener("click", () => {
+    const selectionChanged = index !== activeIndex;
     setActive(index);
+    if (!selectionChanged) pulseSelection(button);
     openSection(button.dataset.section);
   });
 });

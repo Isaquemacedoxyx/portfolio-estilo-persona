@@ -83,6 +83,12 @@ a:focus-visible {
   opacity: 1;
 }
 
+.interface-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+}
+
 .scene-tint {
   z-index: -1;
   background: linear-gradient(90deg, rgba(0, 9, 43, .04), rgba(0, 20, 84, .12) 48%, rgba(0, 16, 73, .30));
@@ -424,7 +430,7 @@ a:focus-visible {
   color: #59eaff;
   cursor: pointer;
   font-family: var(--font-display);
-  font-size: clamp(38px, 4.6vw, 76px);
+  font-size: clamp(32px, 4.2vw, 76px);
   font-weight: 900;
   font-style: italic;
   letter-spacing: -.055em;
@@ -579,6 +585,21 @@ a:focus-visible {
   transform: translateY(-.20em) rotate(2deg) skewX(-5deg) scaleX(1.14) scaleY(1.17);
   z-index: 2;
   pointer-events: none;
+}
+
+.menu-option.is-active.is-pulsing::after {
+  animation: selection-pulse 420ms cubic-bezier(.2, .8, .25, 1);
+}
+
+@keyframes selection-pulse {
+  0%, 100% {
+    opacity: .82;
+    transform: translateY(-.20em) rotate(2deg) skewX(-5deg) scaleX(1.14) scaleY(1.17);
+  }
+  42% {
+    opacity: .94;
+    transform: translateY(-.20em) rotate(2deg) skewX(-5deg) scaleX(1.21) scaleY(1.29);
+  }
 }
 
 .menu-option.is-active .option-text {
@@ -750,8 +771,8 @@ kbd {
   .audio-volume { width: clamp(50px, 14vw, 72px); }
   .profile-mark { top: 11%; left: 5%; font-size: 8px; }
   .profile-mark strong { font-size: 12px; }
-  .menu-area { top: 28%; right: auto; left: 50%; width: max-content; max-width: 90vw; transform: translateX(-50%) rotate(-6deg); }
-  .menu-option { height: clamp(28px, 6.8vw, 40px); padding-left: 12px; font-size: clamp(34px, 8.5vw, 54px); }
+  .menu-area { top: 24%; right: auto; left: 50%; width: max-content; max-width: 88vw; transform: translateX(-50%) rotate(-6deg); }
+  .menu-option { height: clamp(22px, 5vw, 38px); padding-left: 9px; font-size: clamp(22px, 5vw, 38px); }
   .menu-option:nth-child(1) { left: -6px; }
   .menu-option:nth-child(2) { left: 4px; }
   .menu-option:nth-child(3) { left: -2px; }
@@ -770,7 +791,7 @@ kbd {
 @media (max-width: 480px) {
   .background { background-position: 34% center; }
   .profile-mark { top: 12%; }
-  .menu-area { top: 28%; }
+  .menu-area { top: 25%; max-width: 90vw; }
   .audio-control { top: calc(28% - 60px); right: 3%; gap: 6px; }
   .audio-toggle { width: 46px; height: 36px; }
   .audio-icon { width: 44px; height: 33px; }
@@ -785,7 +806,7 @@ kbd {
     font-size: 8px;
     white-space: nowrap;
   }
-  .menu-option { font-size: clamp(34px, 9vw, 44px); }
+  .menu-option { height: clamp(23px, 6vw, 31px); font-size: clamp(23px, 6vw, 31px); }
   .level-marker { display: none; }
   .bottom-help { gap: 8px; }
   .scroll-hint { max-width: 38%; letter-spacing: .08em; }
@@ -795,6 +816,11 @@ kbd {
   .skill-list li { gap: 8px; font-size: 13px; }
 }
 
+@media (max-width: 480px) and (orientation: portrait) {
+  .menu-area { top: 41%; }
+  .audio-control { top: calc(41% - 58px); }
+}
+
 @media (max-height: 620px) and (min-width: 761px) {
   .menu-area { top: 13%; left: 50%; width: max-content; }
   .menu-option { height: clamp(30px, 3vw, 42px); padding-top: 2px; padding-bottom: 2px; font-size: clamp(26px, 3vw, 42px); }
@@ -802,6 +828,7 @@ kbd {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .menu-option.is-active.is-pulsing::after { animation: none; }
   .audio-toggle[aria-pressed="true"] .audio-speaker,
   .audio-toggle[aria-pressed="true"] .audio-subwoofer,
   .audio-toggle[aria-pressed="true"] .audio-speaker__core,

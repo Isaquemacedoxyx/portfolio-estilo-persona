@@ -21,114 +21,117 @@
     </div>
     <div class="scene-tint" aria-hidden="true"></div>
 
-    <header class="top-label">
-      <span class="status-dot" aria-hidden="true"></span>
-      <span>ESTUDANTE DE CIÊNCIA DA COMPUTAÇÃO</span>
-    </header>
+    <div class="interface-layer" id="interfaceLayer">
+      <header class="top-label">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>ESTUDANTE DE CIÊNCIA DA COMPUTAÇÃO</span>
+      </header>
 
-    <section class="audio-control" aria-label="Controles da trilha sonora">
-      <button class="audio-toggle" id="audioToggle" type="button" aria-label="Ativar som" aria-pressed="false">
-        <span class="audio-icon" aria-hidden="true">
-          <svg class="audio-speaker" viewBox="0 0 64 48" focusable="false">
-            <path class="audio-wave audio-wave--left audio-wave--outer" d="M10 8Q0 24 10 40"></path>
-            <path class="audio-wave audio-wave--left audio-wave--inner" d="M18 15Q10 24 18 33"></path>
-            <path class="audio-wave audio-wave--right audio-wave--inner" d="M46 15Q54 24 46 33"></path>
-            <path class="audio-wave audio-wave--right audio-wave--outer" d="M54 8Q64 24 54 40"></path>
-            <g class="audio-subwoofer">
-              <circle class="audio-speaker__rim" cx="32" cy="24" r="17"></circle>
-              <circle class="audio-speaker__ring" cx="32" cy="24" r="12.5"></circle>
-              <circle class="audio-speaker__core" cx="32" cy="24" r="6"></circle>
-              <circle class="audio-speaker__glint" cx="30" cy="22" r="1.5"></circle>
-            </g>
-          </svg>
-        </span>
-      </button>
-      <span class="audio-state" id="audioState" aria-hidden="true">OFF</span>
-      <input class="audio-volume" id="audioVolume" type="range" min="0" max="100" step="1" value="25" aria-label="Volume da música">
-      <span class="audio-value" id="audioValue" aria-hidden="true">25%</span>
-      <span class="audio-status" id="audioStatus" role="status" aria-live="polite" hidden></span>
-    </section>
+      <section class="audio-control" aria-label="Controles da trilha sonora">
+        <button class="audio-toggle" id="audioToggle" type="button" aria-label="Ativar som" aria-pressed="false">
+          <span class="audio-icon" aria-hidden="true">
+            <svg class="audio-speaker" viewBox="0 0 64 48" focusable="false">
+              <path class="audio-wave audio-wave--left audio-wave--outer" d="M10 8Q0 24 10 40"></path>
+              <path class="audio-wave audio-wave--left audio-wave--inner" d="M18 15Q10 24 18 33"></path>
+              <path class="audio-wave audio-wave--right audio-wave--inner" d="M46 15Q54 24 46 33"></path>
+              <path class="audio-wave audio-wave--right audio-wave--outer" d="M54 8Q64 24 54 40"></path>
+              <g class="audio-subwoofer">
+                <circle class="audio-speaker__rim" cx="32" cy="24" r="17"></circle>
+                <circle class="audio-speaker__ring" cx="32" cy="24" r="12.5"></circle>
+                <circle class="audio-speaker__core" cx="32" cy="24" r="6"></circle>
+                <circle class="audio-speaker__glint" cx="30" cy="22" r="1.5"></circle>
+              </g>
+            </svg>
+          </span>
+        </button>
+        <span class="audio-state" id="audioState" aria-hidden="true">OFF</span>
+        <input class="audio-volume" id="audioVolume" type="range" min="0" max="100" step="1" value="25" aria-label="Volume da música">
+        <span class="audio-value" id="audioValue" aria-hidden="true">25%</span>
+        <span class="audio-status" id="audioStatus" role="status" aria-live="polite" hidden></span>
+      </section>
+
+      <aside class="profile-mark" aria-label="Perfil acadêmico">
+        <span class="profile-mark__label">STATUS</span>
+        <strong>EM FORMAÇÃO</strong>
+        <span>APRENDENDO / CRIANDO</span>
+      </aside>
+
+      <section class="menu-area" id="menuView" aria-label="Menu principal">
+        <nav class="menu-list" aria-label="Seções do portfólio">
+          <button class="menu-option is-active" type="button" data-section="about" aria-label="Sobre mim" aria-pressed="true">
+            <span class="selection-white" aria-hidden="true"></span>
+            <span class="option-text" aria-hidden="true">
+              <span class="word"><b>S</b><b>O</b><b>B</b><b>R</b><b>E</b></span>
+              <span class="word"><b>M</b><b>I</b><b>M</b></span>
+            </span>
+            <span class="selection-text-red" aria-hidden="true">
+              <span class="word"><b>S</b><b>O</b><b>B</b><b>R</b><b>E</b></span>
+              <span class="word"><b>M</b><b>I</b><b>M</b></span>
+            </span>
+          </button>
+          <button class="menu-option" type="button" data-section="skills" aria-label="Habilidades" aria-pressed="false">
+            <span class="selection-white" aria-hidden="true"></span>
+            <span class="option-text" aria-hidden="true">
+              <span class="word"><b>H</b><b>A</b><b>B</b><b>I</b><b>L</b><b>I</b><b>D</b><b>A</b><b>D</b><b>E</b><b>S</b></span>
+            </span>
+            <span class="selection-text-red" aria-hidden="true">
+              <span class="word"><b>H</b><b>A</b><b>B</b><b>I</b><b>L</b><b>I</b><b>D</b><b>A</b><b>D</b><b>E</b><b>S</b></span>
+            </span>
+          </button>
+          <button class="menu-option" type="button" data-section="projects" aria-label="Projetos" aria-pressed="false">
+            <span class="selection-white" aria-hidden="true"></span>
+            <span class="option-text" aria-hidden="true">
+              <span class="word"><b>P</b><b>R</b><b>O</b><b>J</b><b>E</b><b>T</b><b>O</b><b>S</b></span>
+            </span>
+            <span class="selection-text-red" aria-hidden="true">
+              <span class="word"><b>P</b><b>R</b><b>O</b><b>J</b><b>E</b><b>T</b><b>O</b><b>S</b></span>
+            </span>
+          </button>
+          <button class="menu-option" type="button" data-section="studies" aria-label="Estudos" aria-pressed="false">
+            <span class="selection-white" aria-hidden="true"></span>
+            <span class="option-text" aria-hidden="true">
+              <span class="word"><b>E</b><b>S</b><b>T</b><b>U</b><b>D</b><b>O</b><b>S</b></span>
+            </span>
+            <span class="selection-text-red" aria-hidden="true">
+              <span class="word"><b>E</b><b>S</b><b>T</b><b>U</b><b>D</b><b>O</b><b>S</b></span>
+            </span>
+          </button>
+          <button class="menu-option" type="button" data-section="links" aria-label="Vínculos" aria-pressed="false">
+            <span class="selection-white" aria-hidden="true"></span>
+            <span class="option-text" aria-hidden="true">
+              <span class="word"><b>V</b><b>Í</b><b>N</b><b>C</b><b>U</b><b>L</b><b>O</b><b>S</b></span>
+            </span>
+            <span class="selection-text-red" aria-hidden="true">
+              <span class="word"><b>V</b><b>Í</b><b>N</b><b>C</b><b>U</b><b>L</b><b>O</b><b>S</b></span>
+            </span>
+          </button>
+          <button class="menu-option" type="button" data-section="system" aria-label="Sistema" aria-pressed="false">
+            <span class="selection-white" aria-hidden="true"></span>
+            <span class="option-text" aria-hidden="true">
+              <span class="word"><b>S</b><b>I</b><b>S</b><b>T</b><b>E</b><b>M</b><b>A</b></span>
+            </span>
+            <span class="selection-text-red" aria-hidden="true">
+              <span class="word"><b>S</b><b>I</b><b>S</b><b>T</b><b>E</b><b>M</b><b>A</b></span>
+            </span>
+          </button>
+        </nav>
+      </section>
+
+      <aside class="level-marker" aria-hidden="true">
+        <span>LEVEL 02</span><i></i><span>LEARNING / BUILDING</span>
+      </aside>
+
+      <footer class="bottom-help">
+        <p class="scroll-hint"><span>ESCOLHA UM CAMINHO</span><b aria-hidden="true">↗</b></p>
+        <div class="game-prompt">
+          <strong>Explore meu portfólio</strong>
+          <small>COMANDOS</small>
+          <span><kbd>↑</kbd><kbd>↓</kbd> Selecionar&nbsp;&nbsp; <kbd>Enter</kbd> Abrir&nbsp;&nbsp; <kbd>Esc</kbd> Voltar</span>
+        </div>
+      </footer>
+    </div>
+
     <audio id="backgroundAudio" src="assets/audio/Color%20Your%20Night.mp3" loop preload="none"></audio>
-
-    <aside class="profile-mark" aria-label="Perfil acadêmico">
-      <span class="profile-mark__label">STATUS</span>
-      <strong>2º SEMESTRE</strong>
-      <span>APRENDENDO / CRIANDO</span>
-    </aside>
-
-    <section class="menu-area" id="menuView" aria-label="Menu principal">
-      <nav class="menu-list" aria-label="Seções do portfólio">
-        <button class="menu-option is-active" type="button" data-section="about" aria-label="Sobre mim" aria-pressed="true">
-          <span class="selection-white" aria-hidden="true"></span>
-          <span class="option-text" aria-hidden="true">
-            <span class="word"><b>S</b><b>O</b><b>B</b><b>R</b><b>E</b></span>
-            <span class="word"><b>M</b><b>I</b><b>M</b></span>
-          </span>
-          <span class="selection-text-red" aria-hidden="true">
-            <span class="word"><b>S</b><b>O</b><b>B</b><b>R</b><b>E</b></span>
-            <span class="word"><b>M</b><b>I</b><b>M</b></span>
-          </span>
-        </button>
-        <button class="menu-option" type="button" data-section="skills" aria-label="Habilidades" aria-pressed="false">
-          <span class="selection-white" aria-hidden="true"></span>
-          <span class="option-text" aria-hidden="true">
-            <span class="word"><b>H</b><b>A</b><b>B</b><b>I</b><b>L</b><b>I</b><b>D</b><b>A</b><b>D</b><b>E</b><b>S</b></span>
-          </span>
-          <span class="selection-text-red" aria-hidden="true">
-            <span class="word"><b>H</b><b>A</b><b>B</b><b>I</b><b>L</b><b>I</b><b>D</b><b>A</b><b>D</b><b>E</b><b>S</b></span>
-          </span>
-        </button>
-        <button class="menu-option" type="button" data-section="projects" aria-label="Projetos" aria-pressed="false">
-          <span class="selection-white" aria-hidden="true"></span>
-          <span class="option-text" aria-hidden="true">
-            <span class="word"><b>P</b><b>R</b><b>O</b><b>J</b><b>E</b><b>T</b><b>O</b><b>S</b></span>
-          </span>
-          <span class="selection-text-red" aria-hidden="true">
-            <span class="word"><b>P</b><b>R</b><b>O</b><b>J</b><b>E</b><b>T</b><b>O</b><b>S</b></span>
-          </span>
-        </button>
-        <button class="menu-option" type="button" data-section="studies" aria-label="Estudos" aria-pressed="false">
-          <span class="selection-white" aria-hidden="true"></span>
-          <span class="option-text" aria-hidden="true">
-            <span class="word"><b>E</b><b>S</b><b>T</b><b>U</b><b>D</b><b>O</b><b>S</b></span>
-          </span>
-          <span class="selection-text-red" aria-hidden="true">
-            <span class="word"><b>E</b><b>S</b><b>T</b><b>U</b><b>D</b><b>O</b><b>S</b></span>
-          </span>
-        </button>
-        <button class="menu-option" type="button" data-section="links" aria-label="Vínculos" aria-pressed="false">
-          <span class="selection-white" aria-hidden="true"></span>
-          <span class="option-text" aria-hidden="true">
-            <span class="word"><b>V</b><b>Í</b><b>N</b><b>C</b><b>U</b><b>L</b><b>O</b><b>S</b></span>
-          </span>
-          <span class="selection-text-red" aria-hidden="true">
-            <span class="word"><b>V</b><b>Í</b><b>N</b><b>C</b><b>U</b><b>L</b><b>O</b><b>S</b></span>
-          </span>
-        </button>
-        <button class="menu-option" type="button" data-section="system" aria-label="Sistema" aria-pressed="false">
-          <span class="selection-white" aria-hidden="true"></span>
-          <span class="option-text" aria-hidden="true">
-            <span class="word"><b>S</b><b>I</b><b>S</b><b>T</b><b>E</b><b>M</b><b>A</b></span>
-          </span>
-          <span class="selection-text-red" aria-hidden="true">
-            <span class="word"><b>S</b><b>I</b><b>S</b><b>T</b><b>E</b><b>M</b><b>A</b></span>
-          </span>
-        </button>
-      </nav>
-    </section>
-
-    <aside class="level-marker" aria-hidden="true">
-      <span>LEVEL 02</span><i></i><span>LEARNING / BUILDING</span>
-    </aside>
-
-    <footer class="bottom-help">
-      <p class="scroll-hint"><span>ESCOLHA UM CAMINHO</span><b aria-hidden="true">↗</b></p>
-      <div class="game-prompt">
-        <strong>Explore meu portfólio</strong>
-        <small>COMANDOS</small>
-        <span><kbd>↑</kbd><kbd>↓</kbd> Selecionar&nbsp;&nbsp; <kbd>Enter</kbd> Abrir&nbsp;&nbsp; <kbd>Esc</kbd> Voltar</span>
-      </div>
-    </footer>
 
     <section class="detail-panel" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden>
       <div class="detail-kicker" id="detailKicker"></div>
@@ -138,12 +141,12 @@
     </section>
 
     <template id="aboutContent">
-      <p>Sou estudante de Ciência da Computação, atualmente no segundo semestre. Tenho interesse em tecnologia, desenvolvimento de software e inteligência artificial.</p>
+      <p>Sou estudante de Ciência da Computação, com interesse em tecnologia, desenvolvimento de software e inteligência artificial.</p>
       <p>Gosto de entender como as coisas funcionam, explorar novas tecnologias e transformar ideias em projetos.</p>
     </template>
 
     <template id="skillsContent">
-      <p>Estou construindo minha base e aprendendo na prática. Estas são tecnologias que estudo — não uma lista de especialidades profissionais.</p>
+      <p>Estas são algumas das tecnologias que estudo e pratico enquanto desenvolvo minha base em programação.</p>
       <ul class="skill-list">
         <li><span>C</span><span>Fundamentos de programação</span></li>
         <li><span>Python</span><span>Lógica e pequenos programas</span></li>
@@ -158,27 +161,27 @@
         <article class="project-entry">
           <h2>desafiocolaborativo-git</h2>
           <p>Projeto acadêmico colaborativo desenvolvido durante o semestre, com foco na prática de trabalho em equipe e Git.</p>
-          <a href="https://github.com/Isaquemacedoxyx" target="_blank" rel="noopener noreferrer">Visitar meu GitHub <span aria-hidden="true">↗</span></a>
+          <a href="https://github.com/Isaquemacedoxyx/desafiocolaborativo-git" target="_blank" rel="noopener noreferrer">Abrir repositório <span aria-hidden="true">&rarr;</span></a>
         </article>
         <article class="project-entry">
           <h2>avalia404</h2>
           <p>Projeto em Python voltado à validação de notas e faltas e ao cálculo de média.</p>
+          <a href="https://github.com/Isaquemacedoxyx/projeto-avalia-404" target="_blank" rel="noopener noreferrer">Abrir repositório <span aria-hidden="true">&rarr;</span></a>
         </article>
         <article class="project-entry">
           <h2>GRUPOECHO</h2>
           <p>Trabalho acadêmico de levantamento e documentação de requisitos, regras de negócio e prototipagem. Não é uma implementação funcional completa.</p>
+          <a href="https://github.com/Isaquemacedoxyx/GRUPOECHO" target="_blank" rel="noopener noreferrer">Abrir repositório <span aria-hidden="true">&rarr;</span></a>
         </article>
       </div>
     </template>
 
     <template id="studiesContent">
-      <p>Estou cursando Ciência da Computação e sigo desenvolvendo minha base acadêmica, um conceito e um projeto de cada vez.</p>
+      <p>Atualmente, estou dedicando mais tempo a:</p>
       <ul class="study-list">
-        <li>Fundamentos de programação</li>
-        <li>Linguagem C</li>
-        <li>Python</li>
-        <li>Desenvolvimento web</li>
-        <li>Banco de dados</li>
+        <li><strong>C e Python:</strong> construir uma base e praticar programação.</li>
+        <li><strong>Lógica:</strong> melhorar a forma como penso e resolvo problemas.</li>
+        <li><strong>Projetos:</strong> colocar em prática o que estou aprendendo, desenvolvendo ideias próprias.</li>
       </ul>
     </template>
 
@@ -186,7 +189,7 @@
       <p>Meus espaços para compartilhar projetos e acompanhar minha trajetória.</p>
       <ul class="link-list">
         <li><a href="https://github.com/Isaquemacedoxyx" target="_blank" rel="noopener noreferrer">GitHub <span>github.com/Isaquemacedoxyx</span><span aria-hidden="true">↗</span></a></li>
-        <li><span class="link-placeholder">LinkedIn <span>Endereço será adicionado em breve</span></span></li>
+        <li><a href="https://www.linkedin.com/in/isaque-macedo-779a1442a" target="_blank" rel="noopener noreferrer">LinkedIn <span>linkedin.com/in/isaque-macedo-779a1442a</span><span aria-hidden="true">&rarr;</span></a></li>
       </ul>
     </template>
 
